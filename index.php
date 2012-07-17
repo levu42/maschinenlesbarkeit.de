@@ -19,8 +19,9 @@
     <!-- Le styles -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
     <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      #padding-top {
+				width: 100%;
+				height: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
     </style>
     <link href="/assets/css/bootstrap-responsive.css" rel="stylesheet">
@@ -40,13 +41,14 @@
   </head>
 
   <body>
+		<div class="visible-desktop" id="padding-top"></div>
 <?php
 	if (current_api()) {
 		if (current_api_has_field('github-url')) {
-			?><a href="<?php echo current_api_field('github-url') ?>"><img style="position: fixed; top: 40px; right: 0; border: 0; z-index: 1000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><?php
+			?><a class="visible-desktop" href="<?php echo current_api_field('github-url') ?>"><img style="position: fixed; top: 40px; right: 0; border: 0; z-index: 1000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><?php
 		}
 	} else {
-		?><a href="https://github.com/levu42/maschinenlesbarkeit.de"><img style="position: fixed; top: 40px; right: 0; border: 0; z-index: 1000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><?php
+		?><a class="visible-desktop" href="https://github.com/levu42/maschinenlesbarkeit.de"><img style="position: fixed; top: 40px; right: 0; border: 0; z-index: 1000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><?php
 	}
 ?>
 
