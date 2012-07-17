@@ -1,5 +1,11 @@
 <?php
 	require_once('api.php');
+	if (isset($_GET['output'])) {
+		if (in_array($_GET['output'], array('xml', 'json'))) {
+			display_api(current_api(), $_GET['output'], current_function());
+			die;
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +69,7 @@
     <div class="container">
 			<div class="notice">This site is work in progress, please report any bugs you encounter to levu@levu.org or @levudev on twitter, thanks!</div>
 			<div>&nbsp;</div>
- 			<?php if (current_api()) {
+			<?php if (current_api()) {
 				display_api(current_api(), 'html', current_function());
 			} else { ?>
 					<h1>APIs</h1>
