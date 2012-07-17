@@ -1,3 +1,6 @@
+<?php
+	require_once('api.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +18,7 @@
       }
     </style>
     <link href="/assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" href="app.css">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -42,8 +46,14 @@
           <a class="brand" href="/">Maschinenlesbarkeit</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+						<?php if (current_api()) { ?>
+							<li><a href="index.php">Home</a></li>
               <li><a href="about.html">About</a></li>
+							<li class="active"><a href="#"><?php echo $GLOBALS['apis'][current_api()]['title']['de']; ?></a></li>					
+						<? } else { ?>
+							<li class="active"><a href="#">Home</a></li>
+              <li><a href="about.html">About</a></li>
+						<? } ?>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -51,12 +61,12 @@
     </div>
 
     <div class="container">
-
-      <h1>APIs</h1>
-			<ul>
-				<li><a href="/europarl-video">Videos aus dem Europäischen Parlament (<i>Videos from the European Parliament</i>)</li>
-			</ul>
-
+ 			<?php if (current_api()) {
+				display_api(current_api(), 'html', current_function());
+			} else { ?>
+					<h1>APIs</h1>
+					<?php html_list_apis(); ?> 
+			<?php } ?>
     </div> <!-- /container -->
 
     <!-- Le javascript

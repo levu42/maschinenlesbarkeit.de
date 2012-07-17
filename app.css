@@ -1,0 +1,15 @@
+.hovertable tr:hover {
+	background-color: #eee;
+}
+.hovertable tr td {
+	padding: 0.2em;
+}
+.pullthleft th {
+	text-align: left;
+}
+th {
+	padding: 0.8em 0.2em;
+}
+body {
+	padding-bottom: 1em;
+}
