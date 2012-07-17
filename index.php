@@ -61,6 +61,8 @@
     </div>
 
     <div class="container">
+			<div class="notice">This is work in progress, please report any bugs you encounter to levu@levu.org or @levudev on twitter, thanks!</div>
+			<div>&nbsp;</div>
  			<?php if (current_api()) {
 				display_api(current_api(), 'html', current_function());
 			} else { ?>

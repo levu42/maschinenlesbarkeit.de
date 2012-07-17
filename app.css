@@ -13,3 +13,19 @@ th {
 body {
 	padding-bottom: 1em;
 }
+.warning {
+	font-size: 110%;
+	padding: 0.6em;
+	margin: 0.2em;
+	border: 1px solid #ccc;
+	border-radius: 0.3em;
+	background-color: #f6cece;
+}
+.notice {
+	font-size: 110%;
+	padding: 0.6em;
+	margin: 0.2em;
+	border: 1px solid #ccc;
+	border-radius: 0.3em;
+	background-color: #F2F5A9;
+}
