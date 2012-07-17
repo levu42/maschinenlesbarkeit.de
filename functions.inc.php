@@ -76,3 +76,19 @@
 		return $time;
 	}
 
+	function current_api_has_field($name) {
+		return api_has_field(current_api(), $name);
+	}
+
+	function current_api_field($name) {
+		return api_field(current_api(), $name);
+	}
+
+	function api_has_field($api, $name) {
+		return isset($GLOBALS['apis'][$api][$name]);
+	}
+
+	function api_field($api, $name) {
+		return $GLOBALS['apis'][$api][$name];
+	}
+
