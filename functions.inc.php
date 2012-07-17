@@ -51,14 +51,14 @@
 
 	function set_api_cache($api, $function, $parameter, $data) {
 		$dir = getcwd();
-		chdir(dirname(__FILE__));
+		chdir(dirname(__FILE__).'/cache/');
 		$filename = md5($api.'/'.$function.'/'.serialize($parameter));
 		file_put_contents($filename, serialize($data));
 		chdir($dir);
 	}
 	function get_api_cache($api, $function, $parameter) {
 		$dir = getcwd();
-		chdir(dirname(__FILE__));
+		chdir(dirname(__FILE__).'/cache/');
 		$filename = md5($api.'/'.$function.'/'.serialize($parameter));
 		$data = unserialize(file_get_contents($filename));
 		chdir($dir);
@@ -66,7 +66,7 @@
 	}
 	function age_of_api_cache($api, $function, $parameter) {
 		$dir = getcwd();
-		chdir(dirname(__FILE__));
+		chdir(dirname(__FILE__).'/cache/');
 		$filename = md5($api.'/'.$function.'/'.serialize($parameter));
 		$time = filemtime($filename);
 		if ($time !== false) {
