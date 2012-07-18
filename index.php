@@ -59,7 +59,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">Maschinenlesbarkeit</a>
+          <a class="brand" href=".">Maschinenlesbarkeit</a>
           <div class="nav-collapse">
             <ul class="nav">
 						<?php if (current_api()) { ?>
