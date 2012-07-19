@@ -14,6 +14,10 @@
 		return $url;
 	}
 
+	function path_to_api() {
+		return './' . current_api();
+	}
+
 	function current_api() {
 		if (!isset($_GET['api'])) {
 			return null;
