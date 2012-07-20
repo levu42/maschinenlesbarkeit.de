@@ -37,3 +37,19 @@ body {
 	border-radius: 0.3em;
 	background-color: #F2F5A9;
 }
+#github-fork-me-badge img {
+	position: fixed;
+	top: 40px;
+	right: 0;
+	border: 0;
+	z-index: 1000;
+}
+#report-bugs-link {
+	position: fixed;
+	bottom: 0;
+	right: 1em;
+	border: 1px solid grey;
+	padding: .4em .6em;
+	border-bottom-width: 0;
+	background-color: #eee;
+}

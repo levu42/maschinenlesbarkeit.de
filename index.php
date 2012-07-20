@@ -50,10 +50,10 @@
 <?php
 	if (current_api()) {
 		if (current_api_has_field('github-url')) {
-			?><a class="visible-desktop" href="<?php echo current_api_field('github-url') ?>"><img style="position: fixed; top: 40px; right: 0; border: 0; z-index: 1000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><?php
+			?><a class="visible-desktop" id="github-fork-me-badge" href="<?php echo current_api_field('github-url') ?>"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><?php
 		}
 	} else {
-		?><a class="visible-desktop" href="https://github.com/levu42/maschinenlesbarkeit.de"><img style="position: fixed; top: 40px; right: 0; border: 0; z-index: 1000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><?php
+		?><a class="visible-desktop" id="github-fork-me-badge" href="https://github.com/levu42/maschinenlesbarkeit.de"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><?php
 	}
 ?>
 
@@ -92,6 +92,10 @@
 					<?php html_list_apis(); ?> 
 			<?php } ?>
     </div> <!-- /container -->
+
+		<?php if (current_api() && current_api_has_field('github-url')) {
+			echo '<div id="report-bugs-link"><a target="_blank" href="' . current_api_field('github-url') . '/issues/new">Feedback</a></div>';
+		} ?>
 
     <!-- Le javascript
     ================================================== -->
