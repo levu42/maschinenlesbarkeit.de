@@ -1,7 +1,11 @@
 <?php
 	require_once('api.php');
 	if (isset($_GET['output'])) {
-		if (in_array($_GET['output'], array('xml', 'json'))) {
+		if (!in_array($_GET['output'], current_api_field('formats'))) {
+			header("HTTP/1.0 42 Error with missing HTTP status code");
+			die;
+		}
+		if ($_GET['output'] != 'html') {
 			display_api(current_api(), $_GET['output'], current_function());
 			die;
 		}
