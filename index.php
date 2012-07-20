@@ -71,7 +71,14 @@
 						<?php if (current_api()) { ?>
 							<li><a href="index.php">Home</a></li>
               <li><a href="about.html">About</a></li>
-							<li class="active"><a href="#"><?php echo $GLOBALS['apis'][current_api()]['title']['de']; ?></a></li>					
+							<li class="active"><a href="#"><?php
+								$titles = $GLOBALS['apis'][current_api()]['title'];
+								if (isset($titles[get_user_lang()])) {
+									echo $titles[get_user_lang()];
+								} else {
+									echo $titles['de'];
+								}
+							?></a></li>					
 						<? } else { ?>
 							<li class="active"><a href="#">Home</a></li>
               <li><a href="about.html">About</a></li>
@@ -83,12 +90,12 @@
     </div>
 
     <div class="container">
-			<div class="notice">This site is work in progress, please report any bugs you encounter to levu@levu.org or @levudev on twitter, thanks!</div>
+			<div class="notice"><?php echo tr("This site is work in progress, please report any bugs you encounter to levu@levu.org or @levudev on twitter, thanks!"); ?></div>
 			<div>&nbsp;</div>
 			<?php if (current_api()) {
 				display_api(current_api(), 'html', current_function());
 			} else { ?>
-					<h1>APIs</h1>
+					<h1><?php echo tr('APIs'); ?></h1>
 					<?php html_list_apis(); ?> 
 			<?php } ?>
     </div> <!-- /container -->

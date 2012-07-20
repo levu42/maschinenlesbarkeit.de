@@ -1,8 +1,17 @@
 <?php
+
+	$is_in_api_function = false;	
+	$dict = json_decode(file_get_contents(dirname(__FILE__) . '/dict.' . get_user_lang() . '.json'), true);
+
 	function html_list_apis($return = false) {
 		$html = '<ul>';
 		foreach($GLOBALS['apis'] as $api => $config) {
-			$html .= '<li><a href="' . link_url($api) . '">' . $config['title']['de'] . ' (<i>' . $config['title']['en'] . '</i>)</li>';
+			if (isset($config['title'][get_user_lang()])) {
+				$title = $config['title'][get_user_lang()];
+			} else {
+				$title = $config['title']['en'];
+			}
+			$html .= '<li><a href="' . link_url($api) . '">' . htmlspecialchars($title) . '</li>';
 		}
 		$html .= '</ul>';
 		if ($return) return $html; else echo $html;
@@ -14,8 +23,9 @@
 		return $url;
 	}
 
-	function path_to_api() {
-		return './' . current_api();
+	function path_to_api($api = null) {
+		if ($api === null) $api = current_api();
+		return './' . $api;
 	}
 
 	function current_api() {
@@ -45,7 +55,9 @@
 		$funcname = preg_replace('/[^a-z0-9]/i', '_', $api) . '_' . $format;
 		$dir = getcwd();
 		chdir (dirname(__FILE__) . '/' . $api);
+		is_in_api_function(true);
 		call_user_func($funcname, $function);
+		is_in_api_function(false);
 		chdir ($dir);
 	}
 
@@ -94,5 +106,65 @@
 
 	function api_field($api, $name) {
 		return $GLOBALS['apis'][$api][$name];
+	}
+
+	function tr($default, $id = null) {
+		$dict = get_current_dict();
+		if (is_null($id)) {
+			if (isset($dict[$default])) {
+				return $dict[$default];
+			} else {
+				return $default;
+			}
+		} else {
+			if (isset($dict[$id])) {
+				return $dict[$id];
+			} else {
+				return $default;
+			}
+		}
+	}
+
+	function is_in_api_function($new = null) {
+		global $is_in_api_function;
+		if ($new !== null) {
+			$is_in_api_function = ($new === true);
+		}
+		return ($is_in_api_function === true);
+	}
+
+	function get_current_dict() {
+		if (is_in_api_function()) {
+			return get_current_api_dict();
+		}
+		return $GLOBALS['dict'];
+	}
+
+	function get_current_api_dict() {
+		return get_api_dict(current_api());
+	}
+
+	function get_api_dict($api) {
+		if (!isset($GLOBALS['apis'][$api]['dict'])) {
+			$dir = getcwd();
+			chdir(dirname(__FILE__));
+			$GLOBALS['apis'][$api]['dict'] = array();
+			if (api_has_field($api, 'dicts')) {
+				$f = api_field($api, 'dicts');
+				if (isset($f[get_user_lang()])) {
+					$GLOBALS['apis'][$api]['dict'] = json_decode(file_get_contents(path_to_api() . '/' . $f[get_user_lang()]), true);
+				}
+			}
+			chdir($dir);
+		}
+		return $GLOBALS['apis'][$api]['dict'];
+	}
+
+	function get_user_lang() {
+		static $lang;
+		if (!isset($lang)) {
+			$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+		}
+		return $lang;
 	}
 
