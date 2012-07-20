@@ -43,6 +43,7 @@
     <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png">
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/jQuery.fastClick.js"></script>
+<?php if (file_exists(dirname(__FILE__) . '/custom.header.php')) { require_once(dirname(__FILE__).'/custom.header.php'); } ?>
   </head>
 
   <body>
@@ -119,6 +120,7 @@
     <script src="assets/js/bootstrap-collapse.js"></script>
     <script src="assets/js/bootstrap-carousel.js"></script>
     <script src="assets/js/bootstrap-typeahead.js"></script>
+<?php if (file_exists(dirname(__FILE__) . '/custom.footer.php')) { require_once(dirname(__FILE__).'/custom.footer.php'); } ?>
 
   </body>
 </html>

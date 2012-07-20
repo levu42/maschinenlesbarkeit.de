@@ -14,3 +14,5 @@ results
 
 node_modules
 npm-debug.log
+custom.footer.php
+custom.header.php
