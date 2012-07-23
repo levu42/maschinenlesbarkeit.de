@@ -85,6 +85,20 @@
               <li><a href="about.html">About</a></li>
 						<? } ?>
             </ul>
+						<ul class="nav pull-right">
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo tr("Language"); ?><b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li>
+										<li><a href="./"><?php echo tr("Autodetect language"); ?></a></li>
+										<li class="divider"></li>
+										<?php foreach(list_available_langs() as $lang) {
+											echo '<li><a href="./?force-ui-lang=' . $lang . '">' . $lang . '</a></li>';
+											} ?>
+									</li>
+								</ul>
+							</li>
+						</ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>

@@ -1,7 +1,11 @@
 <?php
 
 	$is_in_api_function = false;	
-	$dict = json_decode(file_get_contents(dirname(__FILE__) . '/dict.' . get_user_lang() . '.json'), true);
+	$filename = dirname(__FILE__) . '/dict.' . get_user_lang() . '.json';
+	$dict = array();
+	if (file_exists($filename)) {
+		$dict = json_decode(file_get_contents($filename), true);
+	}
 
 	function html_list_apis($return = false) {
 		$html = '<ul>';
@@ -164,7 +168,22 @@
 		static $lang;
 		if (!isset($lang)) {
 			$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+			if (isset($_GET['force-ui-lang'])) {
+				$lang = substr($_GET['force-ui-lang'], 0, 2);
+			}
 		}
 		return $lang;
+	}
+
+	function list_available_langs() {
+		$langs = array('en');
+		$dir = getcwd();
+		chdir(dirname(__FILE__));
+		foreach(glob('./dict.*.json') as $filename) {
+			if (preg_match('/dict\.(.+)\.json/i', $filename, $pat) !== false) {
+				$langs[] = $pat[1];
+			}
+		}
+		return $langs;
 	}
 
